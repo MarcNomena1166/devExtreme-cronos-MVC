@@ -2,9 +2,8 @@
     ViewBag.Title = "FormCronos";
     string[] months = {"", "JAN","FEB","MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC" };
     string[] week = { "", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" };
-}
-@Model Cronos 
-
+} 
+@model string
 <h2>FormCronos</h2>
 
 <div class="container">
@@ -87,5 +86,11 @@
         <br />
         <button type="submit" class="btn btn-primary">Generate Cron expression</button>
     </form>
- 
+    <br />
+    <div class="alert alert-success" role="alert">
+        @if (Model != null)
+        {
+            @Model
+        }
+    </div>
 </div>

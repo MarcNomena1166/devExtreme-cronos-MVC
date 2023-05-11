@@ -16,13 +16,13 @@ namespace DevExtremeMvcApp1.Controllers {
             cronosService = cs;
         }
         public ActionResult Index() {
-            Console.WriteLine("initialisation is working working");
+           
             return View();
         }
         public ActionResult FormCronos()
-        {
-
-            Debug.WriteLine("initialisation is working working");
+        {        
+            string expression= Request.QueryString["expression"];
+            if (expression != null) return View(model:expression);
             return View();
         }
 
@@ -32,9 +32,9 @@ namespace DevExtremeMvcApp1.Controllers {
             Debug.WriteLine($"post working : minutes{Minutes} ,hours :{Hours} ,Day :{Day} ,Month:{Month} ,Week:{Week}");
 
             string cron_exp= cronosService.generateExpressionCronos(Minutes, Hours, Day, Month);
-
-            Debug.WriteLine($"cronos example : * {cron_exp} {Week}");
-            return RedirectToAction("FormCronos"); 
+            string expression = $"cronos time : * {cron_exp} {Week}";
+        //    Debug.WriteLine($"cronos example : * {cron_exp} {Week}");
+            return RedirectToAction("FormCronos", "Home", new {expression= expression }); 
         }
     }
 }
