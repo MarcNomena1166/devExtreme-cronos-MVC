@@ -1,0 +1,91 @@
+﻿@{
+    ViewBag.Title = "FormCronos";
+    string[] months = {"", "JAN","FEB","MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC" };
+    string[] week = { "", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" };
+}
+@Model Cronos 
+
+<h2>FormCronos</h2>
+
+<div class="container">
+    <form method="post" action="@Url.Action("calculateString", "Home")">
+        @Html.AntiForgeryToken()
+        <div class="row align-items-start">
+            <div class="col">
+                Minutes:
+
+                <select name="Minutes" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                    <option value="*">Every Minute</option>
+                    <option value="*/2">Even Minutes</option>
+                    <option value="1-59/2">Odd Minutes</option>
+                    <option value="*/5">Every 5 Minutes</option>
+                    <option value="*/15">Every 15 Minutes</option>
+                    @for (int i = 0; i < 60; i++)
+                    {
+                        <option value=@i>@i</option>
+                    }
+                </select>
+            </div>
+            <div class="col">
+                Hours
+                <select name="Hours" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                    <option value="*">Every Hour</option>
+                    <option value="*/2">Even Hours</option>
+                    <option value="1-23/2">Odd Hours</option>
+                    <option value="*/6">Every 6 Hours</option>
+                    <option value="*/12">Every 12 Hours</option>
+                    @for (int i = 0; i < 24; i++)
+                    {
+                        <option value=@i>@i</option>
+                    }
+                </select>
+            </div>
+            <div class="col">
+                Day of month
+                <select name="Day" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                    <option value="*">Every Day</option>
+                    <option value="*/2">Even Days</option>
+                    <option value="1-31/2">Odd Days</option>
+                    <option value="*/5">Every 5 Day</option>
+                    <option value="*/15">Every half month</option>
+                    @for (int i = 1; i < 32; i++)
+                    {
+                        <option value=@i>@i</option>
+                    }
+                </select>
+            </div>
+
+            <div class="col">
+                Months
+                <select name="Month" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                    <option value="*">Every Month</option>
+                    <option value="*/2">Even Months</option>
+                    <option value="1-11/2">Odd Months</option>
+                    <option value="*/4">Every 4 Months</option>
+                    <option value="*/6">Every half Year</option>
+                    @for (int i = 1; i < 13; i++)
+                    {
+                        <option value=@i>@months[i]</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <br />
+        <div>
+            Weekday
+            <select name="Week" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                <option value="*">Every Weekday</option>
+                <option value="*1-5">Monday-Friday</option>
+                <option value="0,6">Weekend</option>
+                @for (int i = 0; i < 7; i++)
+                {
+                    <option value=@i>@week[i]</option>
+                }
+            </select>
+        </div>
+        <br />
+        <button type="submit" class="btn btn-primary">Generate Cron expression</button>
+    </form>
+ 
+</div>
